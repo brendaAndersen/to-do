@@ -21,22 +21,29 @@ export class TodolistComponent {
   }
 
   onSubmit(form: NgForm){
-    // console.log(form,this.tasks.length+1);
-    this.tasks.push({
-      index: this.tasks.length+1,
-      name: form.controls['task'].value,
-      isCompleted: false
-    })
+    let names : any= [];
+
+    for(let task of this.tasks){
+      names.push(task.name)  
+    }
+    if(!(names.includes(form.controls['task'].value))){
+      this.tasks.push({
+        index: this.tasks.length+1,
+        name: form.controls['task'].value,
+        isCompleted: false
+      })
+    } else {
+      alert("The task already exists!")
+    }
     form.reset();
   }
   
   onCheck(index:number){
-    console.log(this.tasks)
     this.tasks[index].isCompleted = !this.tasks[index].isCompleted;
+
   }
 
   onDelete(index: number){
-    console.log(index)
     this.tasks.splice(index,1)
   }
 }

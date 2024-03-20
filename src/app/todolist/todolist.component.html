@@ -2,7 +2,6 @@
 <div class="container">
     <form (ngSubmit)="onSubmit(form)" #form="ngForm">
        <div class="container form-group">
-          <!-- <label for="task">Task</label> -->
           <div class="row input-group input-group-sm ">
             <div class="col-sm input-group-prepend">  
               <input class="form-control" type="text" 
@@ -10,7 +9,7 @@
               placeholder="add a new task" ngModel name="task">
             </div>
             <div class="col-sm butt">
-              <button type="submit" class="submit btn btn-primary">Add</button>
+              <button type="submit" class="submit btn btn-outline-light">Add</button>
             </div>
           </div>
         </div>
@@ -28,13 +27,17 @@
         </thead>
         <tbody>
           <tr *ngFor="let task of tasks; index as i">
-            <td>{{ task.name }}</td>
+            <td>
+              <p [ngClass]="{'line-through': task.isCompleted === true}">
+                {{ task.name }}
+              </p>
+            </td>
             <td>
                 <input (change)="onCheck(i)" ngModel required #first="ngModel" name="task" id="task" 
                 type="checkbox" class="checkbox" value={i}>
             </td>
             <td>
-                <button [disabled]="form.invalid" class="btn btn-danger btn-sm"
+                <button [disabled]="form.invalid" class="btn btn-outline-danger btn-sm"
                  type="submit" (click)="onDelete(i)"
                 >Delete</button>
             </td>
