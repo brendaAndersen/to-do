@@ -1,0 +1,46 @@
+<h1>TO-DO LIST</h1>
+<div class="container">
+    <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+       <div class="container form-group">
+          <!-- <label for="task">Task</label> -->
+          <div class="row input-group input-group-sm ">
+            <div class="col-sm input-group-prepend">  
+              <input class="form-control" type="text" 
+              id="task" aria-describedby="task" 
+              placeholder="add a new task" ngModel name="task">
+            </div>
+            <div class="col-sm butt">
+              <button type="submit" class="submit btn btn-primary">Add</button>
+            </div>
+          </div>
+        </div>
+        <small *ngIf="form.invalid && form.dirty" id="errorMessage" class="form-text"></small>
+      </form>
+      <hr>
+     
+      <table class="table table-dark">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Task</th>
+            <th scope="col">Completed</th>
+            <th scope="col">Deleted</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let task of tasks; index as i">
+            <td>{{ task.name }}</td>
+            <td>
+                <input (change)="onCheck(i)" ngModel required #first="ngModel" name="task" id="task" 
+                type="checkbox" class="checkbox" value={i}>
+            </td>
+            <td>
+                <button [disabled]="form.invalid" class="btn btn-danger btn-sm"
+                 type="submit" (click)="onDelete(i)"
+                >Delete</button>
+            </td>
+          </tr>
+      </tbody>
+      </table>
+      
+     
+</div>
